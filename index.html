@@ -1,468 +1,2195 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Ubaid Ur Rehman | Full Stack Laravel Developer portfolio website." />
-    <title>Ubaid Ur Rehman | Full Stack Laravel Developer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
-        rel="stylesheet" />
-    <link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ubaid Ur Rehman | PHP & Laravel Developer</title>
+
+    <meta name="description"
+          content="Ubaid Ur Rehman - PHP, Laravel and Full Stack Developer building modern web applications.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        /* =====================================================
+           GLOBAL
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: #07090d;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        section {
+            scroll-margin-top: 100px;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .navbar {
+            position: fixed;
+            top: 18px;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+
+            display: flex;
+            justify-content: center;
+
+            pointer-events: none;
+
+            transition:
+                top 0.5s ease,
+                transform 0.5s ease;
+        }
+
+        .nav-container {
+            width: calc(100% - 50px);
+            max-width: 1180px;
+
+            padding: 14px 22px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: rgba(10, 13, 18, 0.75);
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+
+            border: 1px solid rgba(255,255,255,0.09);
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 15px 45px rgba(0,0,0,0.28);
+
+            pointer-events: auto;
+
+            transition:
+                width 0.55s ease,
+                max-width 0.55s ease,
+                border-radius 0.55s ease,
+                padding 0.55s ease,
+                background 0.55s ease;
+        }
+
+
+        /* =====================================================
+           LOGO
+        ===================================================== */
+
+        .logo {
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: 20px;
+            font-weight: 700;
+
+            color: #ffffff;
+
+            white-space: nowrap;
+
+            transition: 0.4s ease;
+        }
+
+        .logo span {
+            color: #38bdf8;
+        }
+
+
+        /* =====================================================
+           NAV LINKS
+        ===================================================== */
+
+        .nav-links {
+            display: flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+            list-style: none;
+
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            display: block;
+
+            padding: 9px 13px;
+
+            color: #a8b0bb;
+
+            font-size: 13px;
+            font-weight: 500;
+
+            border-radius: 9px;
+
+            transition:
+                color 0.3s ease,
+                background 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+
+            background: rgba(56,189,248,0.09);
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =====================================================
+           SCROLLED HEADER
+        ===================================================== */
+
+        .navbar.scrolled .nav-container {
+            width: fit-content;
+            max-width: 900px;
+
+            padding: 9px 11px;
+
+            border-radius: 50px;
+
+            background: rgba(10,14,20,0.92);
+
+            border-color:
+                rgba(56,189,248,0.14);
+
+            box-shadow:
+                0 15px 45px rgba(0,0,0,0.45),
+                0 0 30px rgba(56,189,248,0.05);
+        }
+
+        .navbar.scrolled .logo {
+            font-size: 14px;
+            padding: 7px 12px;
+        }
+
+
+        /* =====================================================
+           MOBILE MENU
+        ===================================================== */
+
+        .menu-btn {
+            display: none;
+
+            border: none;
+            background: transparent;
+
+            color: #ffffff;
+
+            font-size: 23px;
+
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            min-height: 100vh;
+
+            position: relative;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 130px 20px 90px;
+
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 520px;
+            height: 520px;
+
+            background:
+                rgba(56,189,248,0.12);
+
+            filter: blur(125px);
+
+            border-radius: 50%;
+
+            top: 10%;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: "";
+
+            position: absolute;
+
+            width: 320px;
+            height: 320px;
+
+            background:
+                rgba(14,165,233,0.07);
+
+            filter: blur(110px);
+
+            border-radius: 50%;
+
+            bottom: -120px;
+            right: -50px;
+
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+
+            max-width: 950px;
+        }
+
+        .hero-small {
+            color: #9ca5b1;
+
+            letter-spacing: 5px;
+
+            font-size: 12px;
+            font-weight: 600;
+
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size:
+                clamp(52px, 8vw, 96px);
+
+            line-height: 0.98;
+
+            font-weight: 700;
+
+            letter-spacing: -5px;
+
+            margin-bottom: 28px;
+        }
+
+
+        /* =====================================================
+           EXPERTISE ANIMATION
+        ===================================================== */
+
+        .typing-wrapper {
+            min-height: 62px;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size:
+                clamp(25px, 4vw, 42px);
+
+            font-weight: 600;
+
+            margin-bottom: 25px;
+        }
+
+        .typing-prefix {
+            color: #ffffff;
+
+            margin-right: 10px;
+        }
+
+        #typing-text {
+            color: #38bdf8;
+
+            min-width: 300px;
+
+            text-align: left;
+        }
+
+        .cursor {
+            color: #38bdf8;
+
+            margin-left: 4px;
+
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .hero-description {
+            max-width: 680px;
+
+            margin:
+                0 auto 36px;
+
+            color: #9da6b2;
+
+            font-size: 16px;
+        }
+
+
+        /* =====================================================
+           BUTTONS
+        ===================================================== */
+
+        .hero-buttons {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 14px;
+
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding:
+                14px 26px;
+
+            border-radius: 9px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            transition:
+                transform 0.3s ease,
+                background 0.3s ease,
+                color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #38bdf8;
+
+            color: #061018;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+
+            background: #7dd3fc;
+
+            box-shadow:
+                0 12px 35px rgba(56,189,248,0.20);
+        }
+
+        .btn-outline {
+            border:
+                1px solid rgba(56,189,248,0.28);
+
+            color: #ffffff;
+        }
+
+        .btn-outline:hover {
+            background: #38bdf8;
+
+            border-color: #38bdf8;
+
+            color: #061018;
+
+            transform: translateY(-3px);
+        }
+
+
+        /* =====================================================
+           GENERAL SECTION
+        ===================================================== */
+
+        .section {
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding:
+                110px 25px;
+        }
+
+        .section-label {
+            color: #38bdf8;
+
+            letter-spacing: 3px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size:
+                clamp(35px,5vw,56px);
+
+            line-height: 1.1;
+
+            margin-bottom: 20px;
+        }
+
+        .section-title span {
+            color: #38bdf8;
+        }
+
+
+        /* =====================================================
+           ABOUT
+        ===================================================== */
+
+        .about-section {
+            border-top:
+                1px solid rgba(255,255,255,0.06);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.06);
+        }
+
+        .about-container {
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding:
+                110px 25px;
+
+            display: grid;
+
+            grid-template-columns:
+                0.9fr 1.1fr;
+
+            gap: 80px;
+
+            align-items: center;
+        }
+
+
+        /* =====================================================
+           PHOTO - STRAIGHT
+        ===================================================== */
+
+        .about-image {
+            display: flex;
+
+            justify-content: center;
+        }
+
+        .image-frame {
+            width: 360px;
+            height: 440px;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            border:
+                1px solid rgba(255,255,255,0.10);
+
+            background: #11151b;
+
+            /* Straight image */
+            transform: none;
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.40),
+                0 0 60px rgba(56,189,248,0.07);
+        }
+
+        .image-frame img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            transform: none;
+
+            transition:
+                transform 0.5s ease;
+        }
+
+        .image-frame:hover img {
+            transform: scale(1.03);
+        }
+
+
+        /* =====================================================
+           ABOUT CONTENT
+        ===================================================== */
+
+        .about-content h2 {
+            font-family:
+                "Space Grotesk", sans-serif;
+
+            font-size:
+                clamp(35px,5vw,58px);
+
+            line-height: 1.08;
+
+            margin-bottom: 25px;
+        }
+
+        .about-content h2 span {
+            color: #38bdf8;
+        }
+
+        .about-content p {
+            color: #9da6b2;
+
+            margin-bottom: 17px;
+
+            font-size: 15px;
+        }
+
+        .about-info {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,1fr);
+
+            gap: 15px;
+
+            margin-top: 35px;
+        }
+
+        .info-box {
+            padding: 20px;
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            border-radius: 12px;
+
+            background:
+                rgba(255,255,255,0.025);
+
+            transition:
+                border-color 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .info-box:hover {
+            border-color:
+                rgba(56,189,248,0.25);
+
+            transform: translateY(-3px);
+        }
+
+        .info-box strong {
+            display: block;
+
+            font-size: 13px;
+
+            margin-bottom: 7px;
+        }
+
+        .info-box span {
+            color: #38bdf8;
+
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           SKILLS
+        ===================================================== */
+
+        .skills-section {
+            background: #0a0d12;
+        }
+
+        .skills-grid {
+            margin-top: 50px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4,1fr);
+
+            gap: 18px;
+        }
+
+        .skill-card {
+            padding: 30px 22px;
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            border-radius: 15px;
+
+            background:
+                rgba(255,255,255,0.025);
+
+            transition:
+                transform 0.35s ease,
+                border-color 0.35s ease,
+                box-shadow 0.35s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px);
+
+            border-color:
+                rgba(56,189,248,0.38);
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.30);
+        }
+
+        .skill-icon {
+            font-family:
+                "Space Grotesk", sans-serif;
+
+            font-size: 24px;
+
+            font-weight: 700;
+
+            color: #38bdf8;
+
+            margin-bottom: 20px;
+        }
+
+        .skill-card h3 {
+            font-family:
+                "Space Grotesk", sans-serif;
+
+            margin-bottom: 8px;
+        }
+
+        .skill-card p {
+            color: #8e98a5;
+
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           PROJECTS
+        ===================================================== */
+
+        .projects-grid {
+            margin-top: 50px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2,1fr);
+
+            gap: 25px;
+        }
+
+        .project-card {
+            position: relative;
+
+            overflow: hidden;
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            border-radius: 18px;
+
+            background: #0c1015;
+
+            transition:
+                transform 0.35s ease,
+                border-color 0.35s ease,
+                box-shadow 0.35s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+
+            border-color:
+                rgba(56,189,248,0.30);
+
+            box-shadow:
+                0 25px 60px rgba(0,0,0,0.30);
+        }
+
+        .project-image {
+            height: 280px;
+
+            overflow: hidden;
+
+            background: #141920;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            transition:
+                transform 0.5s ease;
+        }
+
+        .project-card:hover
+        .project-image img {
+            transform: scale(1.06);
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-content h3 {
+            font-family:
+                "Space Grotesk", sans-serif;
+
+            font-size: 23px;
+
+            margin-bottom: 10px;
+        }
+
+        .project-content p {
+            color: #929ca8;
+
+            font-size: 14px;
+
+            margin-bottom: 20px;
+        }
+
+        .project-tags {
+            display: flex;
+
+            gap: 8px;
+
+            flex-wrap: wrap;
+
+            margin-bottom: 20px;
+        }
+
+        .project-tags span {
+            padding:
+                5px 10px;
+
+            border-radius: 5px;
+
+            background:
+                rgba(56,189,248,0.08);
+
+            color: #7dd3fc;
+
+            font-size: 11px;
+        }
+
+        .project-buttons {
+            display: flex;
+
+            gap: 10px;
+        }
+
+        .project-btn {
+            padding:
+                9px 15px;
+
+            border-radius: 6px;
+
+            border:
+                1px solid rgba(255,255,255,0.12);
+
+            font-size: 12px;
+
+            transition:
+                0.3s ease;
+        }
+
+        .project-btn:hover {
+            background: #38bdf8;
+
+            border-color: #38bdf8;
+
+            color: #061018;
+        }
+
+
+        /* =====================================================
+           CONTACT
+        ===================================================== */
+
+        .contact-section {
+            background: #0a0d12;
+
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 700px;
+
+            margin: auto;
+        }
+
+        .contact-content p {
+            color: #929ca8;
+
+            margin-bottom: 30px;
+        }
+
+        .contact-buttons {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+            padding:
+                30px 20px;
+
+            text-align: center;
+
+            border-top:
+                1px solid rgba(255,255,255,0.06);
+
+            color: #707985;
+
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           SCROLL REVEAL
+        ===================================================== */
+
+        .reveal {
+            opacity: 0;
+
+            transform:
+                translateY(35px);
+
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .nav-container {
+                width:
+                    calc(100% - 30px);
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+
+                top: 62px;
+
+                left: 0;
+                right: 0;
+
+                padding: 15px;
+
+                background:
+                    rgba(10,14,19,0.97);
+
+                border:
+                    1px solid rgba(255,255,255,0.08);
+
+                border-radius: 18px;
+
+                flex-direction: column;
+
+                gap: 5px;
+
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                width: 100%;
+
+                padding: 12px;
+            }
+
+            .navbar.scrolled
+            .nav-container {
+                width:
+                    calc(100% - 30px);
+
+                border-radius: 18px;
+
+                padding:
+                    13px 17px;
+            }
+
+            .navbar.scrolled
+            .logo {
+                font-size: 17px;
+
+                padding: 0;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+
+                gap: 50px;
+            }
+
+            .about-image {
+                order: 1;
+            }
+
+            .about-content {
+                order: 2;
+            }
+
+            .skills-grid {
+                grid-template-columns:
+                    repeat(2,1fr);
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                top: 12px;
+            }
+
+            .nav-container {
+                padding:
+                    13px 17px;
+            }
+
+            .logo {
+                font-size: 17px;
+            }
+
+            .hero {
+                padding:
+                    120px 20px 80px;
+            }
+
+            .hero h1 {
+                letter-spacing: -3px;
+
+                font-size:
+                    clamp(44px,13vw,65px);
+            }
+
+            .typing-wrapper {
+                font-size: 24px;
+
+                min-height: 55px;
+            }
+
+            #typing-text {
+                min-width: auto;
+            }
+
+            .hero-description {
+                font-size: 14px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+
+                max-width: 280px;
+            }
+
+            .section {
+                padding:
+                    80px 20px;
+            }
+
+            .about-container {
+                padding:
+                    80px 20px;
+            }
+
+            .image-frame {
+                width: 280px;
+
+                height: 350px;
+
+                transform: none;
+            }
+
+            .about-info {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-image {
+                height: 220px;
+            }
+
+            .project-content {
+                padding: 20px;
+            }
+        }
+
+    </style>
 </head>
+
 
 <body>
 
-    <body class="loading">
-        <div class="page-loader">
-            Loading
-        </div>
-        <div class="progress-bar" id="progressBar"></div>
-        <div class="cursor-dot" id="cursorDot"></div>
-        <div class="cursor-outline" id="cursorOutline"></div>
 
-        <header>
-            <div class="nav-wrap">
-                <a href="#home" class="brand">
-                    <span class="brand-dot"></span>
-                    Ubaid Ur Rehman
-                </a>
-                <nav>
-                    <a href="#about">About</a>
-                    <a href="#skills">Skills</a>
-                    <a href="#projects">Projects</a>
-                    <a href="#services">Services</a>
-                    <a href="#contact">Contact</a>
-                </nav>
-                <div class="actions">
-                    <a class="btn-outline interactive" href="#projects">View Projects</a>
-                </div>
-            </div>
-        </header>
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-        <main class="container">
-            <section class="hero" id="home">
-                <div class="hero-copy">
-                    <span class="eyebrow">Full Stack Laravel Developer</span>
-                    <h1>Ubaid Ur Rehman</h1>
-                    <p>I build fast, modern, secure and responsive web applications using Laravel, PHP, MySQL and
-                        JavaScript.</p>
-                    <div class="hero-actions">
-                        <a class="btn-glow interactive" href="#projects">View Projects</a>
-                        <a class="btn-outline interactive" href="#contact">Hire Me</a>
-                        <a class="btn-outline interactive" href="#" target="_blank" rel="noreferrer">Download Resume</a>
-                    </div>
-                    <div class="hero-meta">
-                        <div class="meta-item"><strong>Experience</strong><span>Laravel & PHP Development</span></div>
-                        <div class="meta-item"><strong>Clients</strong><span>International & Freelance</span></div>
-                        <div class="meta-item"><strong>Focus</strong><span>Performance & UX</span></div>
-                    </div>
-                </div>
+<header class="navbar" id="navbar">
 
-                <div class="hero-visual">
-                    <div class="hero-card">
-                        <div class="profile-hero">
-                            <div class="avatar">UR</div>
-                            <div>
-                                <h3>Premium digital craftsmanship</h3>
-                                <p>Elevating business experiences with elegant Laravel products built for fast growth.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="hero-cta">
-                            <span>Typewriter effect <strong id="typedText"></strong></span>
-                            <span>Ready for international clients, startups and enterprise-grade workflows.</span>
-                        </div>
-                    </div>
-                    <div class="floating-orb orb-1"></div>
-                    <div class="floating-orb orb-2"></div>
-                    <div class="floating-orb orb-3"></div>
-                </div>
-            </section>
+    <div class="nav-container">
 
-            <section id="about">
-                <div class="section-header">
-                    <h2 class="section-title">About</h2>
-                </div>
-                <p class="section-description">I am a passionate Laravel developer, problem solver, clean code
-                    enthusiast
-                    and fast learner. I build responsive websites and web applications that feel luxurious, intuitive,
-                    and
-                    secure, while helping businesses grow through exceptional user experiences.</p>
-                <div class="about-grid">
-                    <div class="glass-card">
-                        <h3>Professional Introduction</h3>
-                        <p>Combining a deep understanding of Laravel and PHP with a refined eye for premium product
-                            design.
-                            I craft high-performance websites, admin panels, APIs and custom systems that serve modern
-                            businesses and ambitious startups.</p>
-                        <ul>
-                            <li>Passionate Laravel Developer</li>
-                            <li>Problem Solver</li>
-                            <li>Clean Code Enthusiast</li>
-                            <li>Responsive Website Developer</li>
-                            <li>Fast Learner</li>
-                            <li>Dedicated Freelancer</li>
-                        </ul>
-                    </div>
-                    <div class="glass-card">
-                        <h3>Core Values</h3>
-                        <ul>
-                            <li>Clarity in code, speed in delivery</li>
-                            <li>Design-led development</li>
-                            <li>Security-first architecture</li>
-                            <li>Scalable Laravel implementations</li>
-                            <li>Polished interfaces with premium motion</li>
-                            <li>Reliable long-term maintainability</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
 
-            <section id="skills">
-                <div class="section-header">
-                    <h2 class="section-title">Skills</h2>
-                </div>
-                <p class="section-description">A balanced full stack skillset tailored for web applications, ecommerce
-                    platforms, APIs and performance-driven digital products.</p>
-                <div class="skills-grid">
-                    <div class="skill-group">
-                        <strong>Frontend</strong>
-                        <div class="skill-card">
-                            <h4>HTML5</h4>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar-inner" data-progress="96"></div>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <h4>CSS3</h4>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar-inner" data-progress="94"></div>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <h4>JavaScript</h4>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar-inner" data-progress="88"></div>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <h4>Bootstrap 5</h4>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar-inner" data-progress="90"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill-group">
-                        <strong>Backend</strong>
-                        <div class="skill-card">
-                            <h4>PHP</h4>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar-inner" data-progress="93"></div>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <h4>Laravel</h4>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar-inner" data-progress="92"></div>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <h4>MySQL</h4>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar-inner" data-progress="89"></div>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <h4>REST APIs</h4>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar-inner" data-progress="87"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill-group">
-                        <strong>Tools</strong>
-                        <div class="skill-card">
-                            <h4>Git</h4>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar-inner" data-progress="94"></div>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <h4>GitHub</h4>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar-inner" data-progress="92"></div>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <h4>Composer</h4>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar-inner" data-progress="88"></div>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <h4>VS Code</h4>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar-inner" data-progress="96"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill-group">
-                        <strong>Infrastructure</strong>
-                        <div class="skill-card">
-                            <h4>XAMPP</h4>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar-inner" data-progress="86"></div>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <h4>Database Design</h4>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar-inner" data-progress="90"></div>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <h4>Authentication Systems</h4>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar-inner" data-progress="89"></div>
-                            </div>
-                        </div>
-                        <div class="skill-card">
-                            <h4>CRUD Applications</h4>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar-inner" data-progress="91"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <a href="#home" class="logo">
+            Ubaid Ur Rehman<span>.</span>
+        </a>
 
-            <section id="projects">
-                <div class="section-header">
-                    <h2 class="section-title">Projects</h2>
-                </div>
-                <p class="section-description">Premium Laravel projects crafted for business operations, hospitality,
-                    ecommerce and dynamic platform experiences.</p>
-                <div class="projects-grid">
-                    <article class="project-card">
-                        <div class="project-preview">Restaurant Management System</div>
-                        <div class="project-content">
-                            <h3>Restaurant Management System</h3>
-                            <p>A complete restaurant platform for managing orders, inventory, reservations, and daily
-                                operations efficiently.</p>
-                            <div class="project-tags"><span>Laravel</span><span>PHP</span><span>MySQL</span></div>
-                        </div>
-                        <div class="project-actions">
-                            <a class="primary interactive" href="#contact">Live Demo</a>
-                            <a class="interactive" href="https://github.com/ubaidurrehmanmuhammadazmat-creator"
-                                target="_blank" rel="noreferrer">GitHub</a>
-                        </div>
-                    </article>
-                    <article class="project-card">
-                        <div class="project-preview">Quiz System</div>
-                        <div class="project-content">
-                            <h3>Quiz System</h3>
-                            <p>A dynamic quiz application with test creation, scoring, user authentication, and result
-                                tracking.</p>
-                            <div class="project-tags"><span>Laravel</span><span>JavaScript</span><span>MySQL</span>
-                            </div>
-                        </div>
-                        <div class="project-actions">
-                            <a class="primary interactive" href="#contact">Live Demo</a>
-                            <a class="interactive" href="https://github.com/ubaidurrehmanmuhammadazmat-creator"
-                                target="_blank" rel="noreferrer">GitHub</a>
-                        </div>
-                    </article>
-                    <article class="project-card">
-                        <div class="project-preview">E-Commerce</div>
-                        <div class="project-content">
-                            <h3>E-Commerce</h3>
-                            <p>A responsive online shopping platform with product management, cart flow, checkout, and
-                                customer-friendly browsing.</p>
-                            <div class="project-tags"><span>Laravel</span><span>PHP</span><span>Bootstrap</span></div>
-                        </div>
-                        <div class="project-actions">
-                            <a class="primary interactive" href="#contact">Live Demo</a>
-                            <a class="interactive" href="https://github.com/ubaidurrehmanmuhammadazmat-creator"
-                                target="_blank" rel="noreferrer">GitHub</a>
-                        </div>
-                    </article>
-                </div>
-            </section>
 
-            <section id="services">
-                <div class="section-header">
-                    <h2 class="section-title">Services</h2>
-                </div>
-                <p class="section-description">High-end digital services for Laravel applications, APIs, admin systems,
-                    optimization and long-term support.</p>
-                <div class="services-grid">
-                    <article class="service-card">
-                        <h4>Laravel Development</h4>
-                        <p>Modern Laravel apps built with performance, security and maintainability at the center.</p>
-                    </article>
-                    <article class="service-card">
-                        <h4>PHP Development</h4>
-                        <p>Server-side craftsmanship with modular architecture and clean backend workflows.</p>
-                    </article>
-                    <article class="service-card">
-                        <h4>Responsive Websites</h4>
-                        <p>Elegant, mobile-first interfaces that adapt beautifully across every screen.</p>
-                    </article>
-                    <article class="service-card">
-                        <h4>Admin Panels</h4>
-                        <p>Control centers that put data, analytics and operations into a polished experience.</p>
-                    </article>
-                    <article class="service-card">
-                        <h4>REST APIs</h4>
-                        <p>Reliable API layers designed for modern integrations, automation and security.</p>
-                    </article>
-                    <article class="service-card">
-                        <h4>Bug Fixing</h4>
-                        <p>Rapid debugging and quality assurance to keep products stable and performant.</p>
-                    </article>
-                    <article class="service-card">
-                        <h4>Website Optimization</h4>
-                        <p>Page speed, accessibility and UX improvements that make every interaction feel premium.</p>
-                    </article>
-                    <article class="service-card">
-                        <h4>Database Design</h4>
-                        <p>Robust data models, relational architecture and scalable storage for growing projects.</p>
-                    </article>
-                </div>
-            </section>
+        <nav>
 
-            <section id="education">
-                <div class="section-header">
-                    <h2 class="section-title">Education & Experience</h2>
-                </div>
-                <div class="education-grid">
-                    <article class="timeline-card"><strong>Education</strong>
-                        <h4>BS Information Technology</h4>
-                        <p>Virtual University of Pakistan — currently completing a BSIT degree with a focus on web
-                            engineering, software design and application development.</p>
-                    </article>
-                    <article class="timeline-card"><strong>Expertise</strong>
-                        <h4>Core Experience Areas</h4>
-                        <p>Laravel development, REST APIs, authentication systems, responsive web development, CRUD
-                            applications, and database management.</p>
-                    </article>
-                </div>
-            </section>
+            <ul class="nav-links" id="navLinks">
 
-            <section id="statistics">
-                <div class="section-header">
-                    <h2 class="section-title">Statistics</h2>
-                </div>
-                <p class="section-description">Key metrics that reflect delivery, experience, and technical commitment
-                    across projects and professional growth.</p>
-                <div class="stats-grid">
-                    <article class="stat-card"><strong data-value="24">0</strong><span>Projects Completed</span>
-                    </article>
-                    <article class="stat-card"><strong data-value="16">0</strong><span>Technologies</span></article>
-                    <article class="stat-card"><strong data-value="12">0</strong><span>GitHub Repositories</span>
-                    </article>
-                    <article class="stat-card"><strong data-value="8">0</strong><span>Happy Clients</span></article>
-                    <article class="stat-card"><strong data-value="3">0</strong><span>Years Learning</span></article>
-                    <article class="stat-card"><strong>100%</strong><span>Quality Focus</span></article>
-                </div>
-            </section>
-
-            <section id="testimonials">
-                <div class="section-header">
-                    <h2 class="section-title">Testimonials</h2>
-                </div>
-                <div class="testimonials-grid">
-                    <article class="testimonial-card">
-                        <p>"Ubaid delivered a beautifully crafted application with excellent communication and a sharp
-                            sense
-                            of design. His Laravel expertise turned our vision into a polished product."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">AL</div>
-                            <div class="author-details">
-                                <h5>Ali Khan</h5><span>Startup Founder</span>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="testimonial-card">
-                        <p>"The application performed flawlessly and the interface felt premium. It was one of the
-                            smoothest
-                            development experiences I’ve had on Fiverr."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">SP</div>
-                            <div class="author-details">
-                                <h5>Sara Patel</h5><span>Product Manager</span>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="testimonial-card">
-                        <p>"Highly recommended for anyone seeking modern Laravel development with a focus on speed,
-                            security, and elegant UX."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">RB</div>
-                            <div class="author-details">
-                                <h5>Ryan Brooks</h5><span>Agency Director</span>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </section>
-
-            <section id="contact">
-                <div class="section-header">
-                    <h2 class="section-title">Contact</h2>
-                </div>
-                <p class="section-description">Ready to build your next web application, ecommerce platform, or custom
-                    backend system? Let's create something that stands out and performs beautifully.</p>
-                <div class="contact-grid">
-                    <div class="contact-card">
-                        <h3>Contact Information</h3>
-                        <div class="contact-info">
-                            <a
-                                href="mailto:ubaidurrehmanmuhammadazmat@gmail.com">ubaidurrehmanmuhammadazmat@gmail.com</a>
-                            <a href="tel:+923286150878">+92 3286150878</a>
-                            <a href="https://github.com/ubaidurrehmanmuhammadazmat-creator" target="_blank"
-                                rel="noreferrer">GitHub</a>
-                            <a href="http://www.linkedin.com/in/ubaid-ur-rehman-azmat-b93961377" target="_blank"
-                                rel="noreferrer">LinkedIn</a>
-                            <span>Pakistan</span>
-                        </div>
-                    </div>
-                    <form class="contact-card contact-form" aria-label="Contact form">
-                        <div class="field"><label for="name">Name</label><input id="name" name="name" type="text"
-                                placeholder="Your name" required /></div>
-                        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email"
-                                placeholder="Your email" required /></div>
-                        <div class="field"><label for="subject">Subject</label><input id="subject" name="subject"
-                                type="text" placeholder="Project subject" required /></div>
-                        <div class="field"><label for="message">Message</label><textarea id="message" name="message"
-                                placeholder="Tell me about your project" required></textarea></div>
-                        <button class="submit-btn interactive" type="submit">Send Message</button>
-                    </form>
-                </div>
-            </section>
-        </main>
-
-        <footer>
-            <div class="footer-inner">
-                <div>© 2026 Ubaid Ur Rehman. Crafted for premium digital experiences.</div>
-                <div class="footer-actions">
-                    <a href="https://github.com/ubaidurrehmanmuhammadazmat-creator" target="_blank"
-                        rel="noreferrer">GitHub</a>
-                    <a href="https://www.linkedin.com/in/ubaid-ur-rehman-azmat-b93961377/" target="_blank"
-                        rel="noopener noreferrer">
-                        LinkedIn
+                <li>
+                    <a href="#home">
+                        Home
                     </a>
-                    <a href="mailto:ubaidurrehmanmuhammadazmat@gmail.com">Email</a>
-                    <a class="back-to-top interactive" href="#home">↑</a>
-                </div>
+                </li>
+
+                <li>
+                    <a href="#about">
+                        About
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#skills">
+                        Skills
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#projects">
+                        Projects
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#contact">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+
+        <button
+            class="menu-btn"
+            id="menuBtn"
+            aria-label="Open menu">
+
+            ☰
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content reveal">
+
+
+        <p class="hero-small">
+            HELLO, I'M
+        </p>
+
+
+        <h1>
+            Ubaid Ur Rehman
+        </h1>
+
+
+        <div class="typing-wrapper">
+
+            <span class="typing-prefix">
+                I am a
+            </span>
+
+            <span id="typing-text"></span>
+
+            <span class="cursor">
+                |
+            </span>
+
+        </div>
+
+
+        <p class="hero-description">
+
+            I build modern, responsive and functional
+            web applications using PHP, Laravel,
+            MySQL and modern web technologies.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+
+            <a
+                href="assets/Ubaid-Ur-Rehman-Resume.pdf"
+                class="btn btn-primary"
+                target="_blank">
+
+                Download Resume
+
+            </a>
+
+
+            <a
+                href="#projects"
+                class="btn btn-outline">
+
+                View Projects
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section
+    class="about-section"
+    id="about">
+
+
+    <div class="about-container">
+
+
+        <div class="about-image reveal">
+
+            <div class="image-frame">
+
+                <img
+                    src="images/ubaid professional.jpeg"
+                    alt="Ubaid Ur Rehman">
+
             </div>
-        </footer>
 
-        <script src="index.js"></script>
-    </body>
+        </div>
 
+
+        <div class="about-content reveal">
+
+
+            <p class="section-label">
+                ABOUT ME
+            </p>
+
+
+            <h2>
+
+                Turning ideas into
+                <span>
+                    digital solutions.
+                </span>
+
+            </h2>
+
+
+            <p>
+
+                I'm Ubaid Ur Rehman, a passionate
+                PHP and Laravel developer focused on
+                building clean, responsive and
+                user-friendly web applications.
+
+            </p>
+
+
+            <p>
+
+                I work with PHP, Laravel, MySQL,
+                JavaScript, Bootstrap and REST APIs.
+                I enjoy developing practical solutions,
+                creating efficient backend systems and
+                turning ideas into functional websites
+                and applications.
+
+            </p>
+
+
+            <p>
+
+                I'm continuously improving my development
+                skills and looking for opportunities where
+                I can contribute, learn and build
+                meaningful software.
+
+            </p>
+
+
+            <div class="about-info">
+
+
+                <div class="info-box">
+
+                    <strong>
+                        Development
+                    </strong>
+
+                    <span>
+                        PHP / Laravel
+                    </span>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <strong>
+                        Database
+                    </strong>
+
+                    <span>
+                        MySQL
+                    </span>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <strong>
+                        Frontend
+                    </strong>
+
+                    <span>
+                        HTML / CSS / JS
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SKILLS
+===================================================== -->
+
+<section
+    class="section skills-section"
+    id="skills">
+
+
+    <p class="section-label">
+        MY EXPERTISE
+    </p>
+
+
+    <h2 class="section-title">
+
+        Technologies I
+        <span>
+            work with.
+        </span>
+
+    </h2>
+
+
+    <div class="skills-grid">
+
+
+        <div class="skill-card reveal">
+
+            <div class="skill-icon">
+                PHP
+            </div>
+
+            <h3>
+                PHP
+            </h3>
+
+            <p>
+                Backend development and
+                dynamic web applications.
+            </p>
+
+        </div>
+
+
+        <div class="skill-card reveal">
+
+            <div class="skill-icon">
+                LR
+            </div>
+
+            <h3>
+                Laravel
+            </h3>
+
+            <p>
+                MVC applications, authentication,
+                CRUD and APIs.
+            </p>
+
+        </div>
+
+
+        <div class="skill-card reveal">
+
+            <div class="skill-icon">
+                DB
+            </div>
+
+            <h3>
+                MySQL
+            </h3>
+
+            <p>
+                Database design, queries,
+                relationships and management.
+            </p>
+
+        </div>
+
+
+        <div class="skill-card reveal">
+
+            <div class="skill-icon">
+                JS
+            </div>
+
+            <h3>
+                JavaScript
+            </h3>
+
+            <p>
+                Interactive and dynamic
+                frontend experiences.
+            </p>
+
+        </div>
+
+
+        <div class="skill-card reveal">
+
+            <div class="skill-icon">
+                HTML
+            </div>
+
+            <h3>
+                HTML5
+            </h3>
+
+            <p>
+                Semantic and structured
+                modern web pages.
+            </p>
+
+        </div>
+
+
+        <div class="skill-card reveal">
+
+            <div class="skill-icon">
+                CSS
+            </div>
+
+            <h3>
+                CSS3
+            </h3>
+
+            <p>
+                Responsive layouts,
+                animations and modern UI.
+            </p>
+
+        </div>
+
+
+        <div class="skill-card reveal">
+
+            <div class="skill-icon">
+                API
+            </div>
+
+            <h3>
+                REST APIs
+            </h3>
+
+            <p>
+                Backend APIs and integration
+                with web applications.
+            </p>
+
+        </div>
+
+
+        <div class="skill-card reveal">
+
+            <div class="skill-icon">
+                Git
+            </div>
+
+            <h3>
+                Git & GitHub
+            </h3>
+
+            <p>
+                Version control and
+                collaborative development.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PROJECTS
+===================================================== -->
+
+<section
+    class="section"
+    id="projects">
+
+
+    <p class="section-label">
+        MY WORK
+    </p>
+
+
+    <h2 class="section-title">
+
+        Selected
+        <span>
+            Projects.
+        </span>
+
+    </h2>
+
+
+    <div class="projects-grid">
+
+
+        <!-- SHOP MANAGEMENT -->
+
+        <div class="project-card reveal">
+
+            <div class="project-image">
+
+                <img
+                    src="images/shop-management.png"
+                    alt="Shop Management System">
+
+            </div>
+
+
+            <div class="project-content">
+
+                <h3>
+                    Shop Management System
+                </h3>
+
+
+                <p>
+
+                    A Laravel-based shop management
+                    system for managing products
+                    and business data.
+
+                </p>
+
+
+                <div class="project-tags">
+
+                    <span>Laravel</span>
+                    <span>PHP</span>
+                    <span>MySQL</span>
+                    <span>Bootstrap</span>
+
+                </div>
+
+
+                <div class="project-buttons">
+
+                    <a
+                        href="https://github.com/Asad-Rafique/shop_managment_systam"
+                        target="_blank"
+                        class="project-btn">
+
+                        GitHub
+
+                    </a>
+
+
+                    <a
+                        href="#"
+                        class="project-btn">
+
+                        Live Demo
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- QUIZ MANAGEMENT -->
+
+        <div class="project-card reveal">
+
+            <div class="project-image">
+
+                <img
+                    src="images/quiz-management.png"
+                    alt="Quiz Management System">
+
+            </div>
+
+
+            <div class="project-content">
+
+                <h3>
+                    Quiz Management System
+                </h3>
+
+
+                <p>
+
+                    A web-based quiz platform for
+                    managing questions, quizzes
+                    and user results.
+
+                </p>
+
+
+                <div class="project-tags">
+
+                    <span>PHP</span>
+                    <span>Laravel</span>
+                    <span>MySQL</span>
+                    <span>JavaScript</span>
+
+                </div>
+
+
+                <div class="project-buttons">
+
+                    <a
+                        href="#"
+                        class="project-btn">
+
+                        GitHub
+
+                    </a>
+
+
+                    <a
+                        href="#"
+                        class="project-btn">
+
+                        Live Demo
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SHOPIFY -->
+
+        <div class="project-card reveal">
+
+            <div class="project-image">
+
+                <img
+                    src="images/shopify-store.png"
+                    alt="Shopify Store">
+
+            </div>
+
+
+            <div class="project-content">
+
+                <h3>
+                    Shopify Store
+                </h3>
+
+
+                <p>
+
+                    A modern Shopify store with
+                    customized storefront design
+                    and responsive layout.
+
+                </p>
+
+
+                <div class="project-tags">
+
+                    <span>Shopify</span>
+                    <span>Liquid</span>
+                    <span>HTML</span>
+                    <span>CSS</span>
+
+                </div>
+
+
+                <div class="project-buttons">
+
+                    <a
+                        href="#"
+                        class="project-btn">
+
+                        Preview
+
+                    </a>
+
+
+                    <a
+                        href="#"
+                        class="project-btn">
+
+                        Live Demo
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- REST API -->
+
+        <div class="project-card reveal">
+
+            <div class="project-image">
+
+                <img
+                    src="images/rest-api-backend.png"
+                    alt="REST API Backend">
+
+            </div>
+
+
+            <div class="project-content">
+
+                <h3>
+                    REST API Backend
+                </h3>
+
+
+                <p>
+
+                    Backend API architecture for
+                    web applications with structured
+                    endpoints and database integration.
+
+                </p>
+
+
+                <div class="project-tags">
+
+                    <span>Laravel</span>
+                    <span>PHP</span>
+                    <span>REST API</span>
+                    <span>MySQL</span>
+
+                </div>
+
+
+                <div class="project-buttons">
+
+                    <a
+                        href="#"
+                        class="project-btn">
+
+                        GitHub
+
+                    </a>
+
+
+                    <a
+                        href="#"
+                        class="project-btn">
+
+                        API Demo
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CONTACT
+===================================================== -->
+
+<section
+    class="section contact-section"
+    id="contact">
+
+
+    <div class="contact-content reveal">
+
+
+        <p class="section-label">
+            GET IN TOUCH
+        </p>
+
+
+        <h2 class="section-title">
+
+            Let's build something
+            <span>
+                great.
+            </span>
+
+        </h2>
+
+
+        <p>
+
+            I'm open to development opportunities,
+            freelance projects and collaborations.
+
+        </p>
+
+
+        <div class="contact-buttons">
+
+
+            <a
+                href="mailto:ubaidurrehaman@example.com"
+                class="btn btn-primary">
+
+                Email Me
+
+            </a>
+
+
+            <a
+                href="https://www.linkedin.com/in/ubaid-ur-rehman-azmat-b93961377/"
+                target="_blank"
+                class="btn btn-outline">
+
+                LinkedIn
+
+            </a>
+
+
+            <a
+                href="https://github.com/ubaidurrehmanmuhammadazmat"
+                target="_blank"
+                class="btn btn-outline">
+
+                GitHub
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    © 2026 Ubaid Ur Rehman.
+    All rights reserved.
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+    /* =====================================================
+       MOBILE MENU
+    ===================================================== */
+
+    const menuBtn =
+        document.getElementById("menuBtn");
+
+    const navLinks =
+        document.getElementById("navLinks");
+
+
+    menuBtn.addEventListener("click", () => {
+
+        navLinks.classList.toggle("active");
+
+    });
+
+
+    document
+        .querySelectorAll(".nav-links a")
+        .forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                navLinks.classList.remove("active");
+
+            });
+
+        });
+
+
+
+    /* =====================================================
+       FLOATING HEADER ON SCROLL
+    ===================================================== */
+
+    const navbar =
+        document.getElementById("navbar");
+
+
+    function updateNavbar() {
+
+        if (window.scrollY > 80) {
+
+            navbar.classList.add("scrolled");
+
+        } else {
+
+            navbar.classList.remove("scrolled");
+
+        }
+
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        updateNavbar
+    );
+
+
+    updateNavbar();
+
+
+
+    /* =====================================================
+       EXPERTISE TYPING ANIMATION
+    ===================================================== */
+
+    const professions = [
+
+        "PHP Developer",
+
+        "Laravel Developer",
+
+        "Web Developer",
+
+        "Backend Developer",
+
+        "Full Stack Developer",
+
+        "REST API Developer"
+
+    ];
+
+
+    const typingElement =
+        document.getElementById("typing-text");
+
+
+    let professionIndex = 0;
+
+    let characterIndex = 0;
+
+    let deleting = false;
+
+
+    function typeProfession() {
+
+        const current =
+            professions[professionIndex];
+
+
+        if (!deleting) {
+
+            typingElement.textContent =
+                current.substring(
+                    0,
+                    characterIndex + 1
+                );
+
+            characterIndex++;
+
+
+            if (
+                characterIndex ===
+                current.length
+            ) {
+
+                deleting = true;
+
+                setTimeout(
+                    typeProfession,
+                    1600
+                );
+
+                return;
+            }
+
+
+            setTimeout(
+                typeProfession,
+                80
+            );
+
+
+        } else {
+
+            typingElement.textContent =
+                current.substring(
+                    0,
+                    characterIndex - 1
+                );
+
+            characterIndex--;
+
+
+            if (characterIndex === 0) {
+
+                deleting = false;
+
+                professionIndex =
+                    (
+                        professionIndex + 1
+                    ) %
+                    professions.length;
+
+                setTimeout(
+                    typeProfession,
+                    350
+                );
+
+                return;
+            }
+
+
+            setTimeout(
+                typeProfession,
+                45
+            );
+
+        }
+
+    }
+
+
+    typeProfession();
+
+
+
+    /* =====================================================
+       SCROLL REVEAL
+    ===================================================== */
+
+    const revealElements =
+        document.querySelectorAll(".reveal");
+
+
+    const observer =
+        new IntersectionObserver(
+
+            (entries) => {
+
+                entries.forEach(entry => {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        entry.target
+                            .classList
+                            .add("active");
+
+                    }
+
+                });
+
+            },
+
+            {
+                threshold: 0.12
+            }
+
+        );
+
+
+    revealElements.forEach(element => {
+
+        observer.observe(element);
+
+    });
+
+
+</script>
+
+
+</body>
 </html>
